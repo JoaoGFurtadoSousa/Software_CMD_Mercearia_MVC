@@ -1,0 +1,6 @@
+{"id": 2, "nome": "dsadasdP", "preco": 600.0, "fornecedor": "Sony", "categoria": "Videogames"}
+{"id": 2, "nome": "dsadasdP", "preco": 600.0, "fornecedor": "Sony", "categoria": "Videogames"}
+{"id": 2, "nome": "dsadasdP", "preco": 600.0, "fornecedor": "Sony", "categoria": "Videogames"}
+{"id": 2, "nome": "dsadasdP", "preco": 600.0, "fornecedor": "Sony", "categoria": "Videogames"}
+{"id": 2, "nome": "dsadasdP", "preco": 600.0, "fornecedor": "Sony", "categoria": "Videogames"}
+{"id": 2, "nome": "dsadasdP", "preco": 600.0, "fornecedor": "Sony", "categoria": "Videogames"}
