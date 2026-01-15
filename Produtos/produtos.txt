@@ -1,8 +1,1 @@
-{"id": 2, "nome": "dsadasdP", "preco": 600.0, "fornecedor": "Sony", "categoria": "Videogames"}
-{"id": 5, "nome": "Nintendo Switch", "preco": 2.5, "fornecedor": "Nintendo", "categoria": "Videogames"}
-{"id": 6, "nome": "PS5 Slim", "preco": 2.5, "fornecedor": "Nintendo", "categoria": "Videogames"}
-{"id": 7, "nome": "Xbox Series S", "preco": 2.5, "fornecedor": "Microsoft", "categoria": "Videogames"}
-{"id": 8, "nome": "PS2", "preco": 500.0, "fornecedor": "Sony", "categoria": "Videogames"}
-{"id": 9, "nome": "Ps1", "preco": 150.0, "fornecedor": "Sony", "categoria": "Videogames"}
-{"id": 10, "nome": "Nintendo 3ds", "preco": 700.0, "fornecedor": "Nintendo", "categoria": "Videogames"}
-{"id": 11, "nome": "Nintendo64", "preco": 800.0, "fornecedor": "Nintendo", "categoria": "Videogames"}
+{"id": 1, "nome": "PS5", "preco": 3.5, "fornecedor": "Sony", "categoria": "Videogames"}

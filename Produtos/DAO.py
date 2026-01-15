@@ -25,8 +25,8 @@ class ProdutoDAO:
                 produtos.append(data_em_dict)
                 for produto in produtos:
                      if produto["id"] == id:
-                          return True, produto
-        return False
+                          return True, produto, produtos
+        return False, None, None
 
     @classmethod
     def excluir_produto(cls, id:int):
@@ -62,3 +62,6 @@ class ProdutoDAO:
                 for produto in produtos:
                      ultimo_id = produto['id']
             return [produtos, ultimo_id]
+        
+    @classmethod
+    def 
