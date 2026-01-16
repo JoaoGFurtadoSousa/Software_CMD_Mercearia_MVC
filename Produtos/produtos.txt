@@ -1,1 +1,4 @@
-{"id": 1, "nome": "PS5", "preco": 3.5, "fornecedor": "Sony", "categoria": "Videogames"}
+{"id": 1, "nome": "PS5", "preco": 3.55, "fornecedor": "Sony", "categoria": "Videogames"}
+{"id": 2, "nome": "Xbox", "preco": 3.5, "fornecedor": "Microsoft", "categoria": "Videogames"}
+{"id": 3, "nome": "Nintendo Switch", "preco": 2.5, "fornecedor": "Nintendo", "categoria": "Videogames"}
+{"id": 4, "nome": "Xbox One", "preco": 1.5, "fornecedor": "Microsoft", "categoria": "Videogames"}

@@ -6,8 +6,6 @@ class ProdutosController:
     def verifica_se_ha_campos_nulos(cls, **kwargs):
         print(kwargs)
         for chave, valor in kwargs.items():
-            print(chave)
-            print(valor)
             if valor is None: #anotas o is
                 return False
             
@@ -29,12 +27,23 @@ class ProdutosController:
         return produtos
     
     @classmethod
-    def alterar_produto_existente(cls, id : int, ):
+    def alterar_produto_existente(cls, id : int, nome: str, preco:float, fornecedor: str, categoria: str):
         cls.listar_todos_os_produtos()
-        _, produto, produtos = ProdutoDAO.buscar_produto(id)
+        _= ProdutoDAO.atualizar_produto(id= id,
+                                        nome= nome,
+                                        preco= preco, 
+                                        fornecedor= fornecedor,
+                                        categoria= categoria)
         if _ is False:
             return False
-        print(produto)
-        print(produtos)
+        """print(produto)
+        print(produtos)"""
+
+    @classmethod
+    def excluir_produto(cls, id: int):
+        produto_excluido = ProdutoDAO.excluir_produto(id = id)
+        if produto_excluido:
+            return True
+        return False
     
    
