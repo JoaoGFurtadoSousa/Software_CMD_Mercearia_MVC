@@ -1,21 +1,24 @@
 import os, time
 from Controller import ProdutosController
+from Categoria.Controller import CategoriasController
 
-controller = ProdutosController()
+
+controllerProd = ProdutosController()
+controllerCateg = CategoriasController()
 
 def limpa_terminal():
     os.system('cls')
 
 
 def salvar_novo_prod_interface(nome: str, preco: float, fornecedor: str, categoria: str):
-    produto = controller.salvar_produto(nome = nome, preco = preco, fornecedor = fornecedor, categoria = categoria)
+    produto = controllerProd.salvar_produto(nome = nome, preco = preco, fornecedor = fornecedor, categoria = categoria)
     if produto:
         print("Produto criado com sucesso. 201")
     else:
         print('Erro ao criar o produto. Tente novamente inserindo o formato valido dos dados')
 
 def alterar_prod_interface(nome: str, preco: float, fornecedor: str, categoria: str):
-    produto = controller.salvar_produto(nome = nome, preco = preco, fornecedor = fornecedor, categoria = categoria)
+    produto = controllerProd.salvar_produto(nome = nome, preco = preco, fornecedor = fornecedor, categoria = categoria)
     if produto:
         print("Produto criado com sucesso. 201")
     else:
@@ -32,7 +35,7 @@ def exibir_menu():
             limpa_terminal()
             match escolha_usuario:
                 case 1:
-                    produtos = controller.listar_todos_os_produtos()
+                    produtos = controllerProd.listar_todos_os_produtos()
                     for lista_de_produtos in produtos:
                         print(lista_de_produtos)
                 
@@ -43,7 +46,7 @@ def exibir_menu():
                             preco= float(input("Valor: "))
                             fornecedor = str(input("Fornecedor: "))
                             categoria = str(input("Categoria: "))
-                            validacao_de_campos = controller.verifica_se_ha_campos_nulos(nome = nome, 
+                            validacao_de_campos = controllerProd.verifica_se_ha_campos_nulos(nome = nome, 
                                                                                          preco = preco, 
                                                                                          fornecedor = fornecedor, 
                                                                                          categoria = categoria)
@@ -64,7 +67,7 @@ def exibir_menu():
                             
                 
                 case 3:
-                    produtos = controller.listar_todos_os_produtos()
+                    produtos = controllerProd.listar_todos_os_produtos()
                     for lista_de_produtos in produtos:
                         print(lista_de_produtos)
                     while True:
@@ -73,7 +76,7 @@ def exibir_menu():
                         preco= float(input("Valor: "))
                         fornecedor = str(input("Fornecedor: "))
                         categoria = str(input("Categoria: "))
-                        produto = controller.alterar_produto_existente(id = produto_que_sera_alterado,
+                        produto = controllerProd.alterar_produto_existente(id = produto_que_sera_alterado,
                                                                        nome= nome,
                                                                        preco = preco,
                                                                        fornecedor = fornecedor,
@@ -85,12 +88,12 @@ def exibir_menu():
                             print("Produto alterado com sucesso. 200")
                             break
                 case 4:
-                    produtos = controller.listar_todos_os_produtos()
+                    produtos = controllerProd.listar_todos_os_produtos()
                     for lista_de_produtos in produtos:
                         print(lista_de_produtos)
                     while True:
                         produto_que_sera_excluido = int(input("Encaminhe o ID do produto que irá ser alterado: "))
-                        produto_que_sera_excluido= controller.excluir_produto(id= produto_que_sera_excluido)
+                        produto_que_sera_excluido= controllerProd.excluir_produto(id= produto_que_sera_excluido)
                         if produto_que_sera_excluido:
                             print("Produto excluido com sucesso")
                             break
