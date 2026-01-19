@@ -1,5 +1,5 @@
-from Produtos.DAO import CategoriaDAO
-from Produtos.Models import Categoria
+from Categoria.DAO import CategoriaDAO
+from Categoria.Models import Categoria
 
 class CategoriasController:
     @classmethod
@@ -15,7 +15,7 @@ class CategoriasController:
             
 
     @classmethod
-    def salvar_categoria(cls, nome: str, preco:float, fornecedor: str, categoria: str):
+    def salvar_categoria(cls, nome: str):
         id_categoria = CategoriaDAO.ler_todas_as_categorias()
         id_categoria = id_categoria[1] + 1
         categoria = Categoria(id = id_categoria, nome = nome)
@@ -29,7 +29,7 @@ class CategoriasController:
     @classmethod
     def alterar_categoria_existente(cls, id : int, nome: str):
         cls.listar_todos_os_categorias()
-        _= CategoriaDAO.atualizar_categoria(id= id, nome= nome)
+        _ = CategoriaDAO.atualizar_categoria(id= id, nome= nome)
         if _ is False:
             return False
 

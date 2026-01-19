@@ -1,5 +1,5 @@
 import os, time
-from Controller import CategoriasController
+from Categoria.Controller import CategoriasController
 
 controller = CategoriasController()
 

@@ -1,5 +1,5 @@
-from DAO import ProdutoDAO
-from Models import Produto
+from Produtos.DAO import ProdutoDAO
+from Produtos.Models import Produto
 
 class ProdutosController:
     @classmethod

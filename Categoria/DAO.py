@@ -1,12 +1,19 @@
 import json
-from Models import Categoria
+from Categoria.Models import Categoria
+from pathlib import Path
+
+
+
+BASE_DIR = Path(__file__).parent
+ARQUIVO_CATEGORIAS = BASE_DIR / "categorias.txt"
+
 
 class CategoriaDAO:
     @classmethod
     def ler_todas_as_categorias(cls):
         categorias = []
         ultimo_id = 0
-        with open('categorias.txt', 'r', encoding='utf-8') as arq:
+        with open(ARQUIVO_CATEGORIAS, 'r', encoding='utf-8') as arq:
             for linha in arq: #percorrendo linha a linha do arquivo de produtos
                 linha = linha.strip() # internamente cada linha possui um \n no final. Esse .strip() serve para tirar esse \n e falar que aquela linha chegou ao fim
                 data_em_dict = json.loads(linha) #convertendo str para dicionario python
@@ -18,7 +25,7 @@ class CategoriaDAO:
 
     @classmethod
     def salvar_categoria(cls, categoria: Categoria):
-            with open('categorias.txt', 'a') as escrever_no_arquivo:
+            with open(ARQUIVO_CATEGORIAS, 'a') as escrever_no_arquivo:
                 try:
                     categoria=categoria.exibir_todos_os_dados_da_instancia()
                     instancia_em_json = json.dumps(categoria)
@@ -33,7 +40,7 @@ class CategoriaDAO:
         categorias = []
         categoria_encontrada = None
 
-        with open('categorias.txt', 'r', encoding='utf-8') as arq:
+        with open(ARQUIVO_CATEGORIAS, 'r', encoding='utf-8') as arq:
             for linha in arq:
                 linha = linha.strip()
                 if not linha:
@@ -54,7 +61,7 @@ class CategoriaDAO:
     def excluir_categoria(cls, id:int):
         categorias = []
         existe_categoria = True
-        with open('categorias.txt', 'r') as arq:
+        with open(ARQUIVO_CATEGORIAS, 'r') as arq:
             for linha in arq: #percorrendo linha a linha do arquivo de produtos 
                 linha = linha.strip() # internamente cada linha possui um \n no final. Esse .strip() serve para tirar esse \n e falar que aquela linha chegou ao fim
                 data_em_dict = json.loads(linha) #convertendo str para dicionario python
@@ -64,7 +71,7 @@ class CategoriaDAO:
                           categorias.remove(categoria)
                     else:
                         existe_categoria = False                            
-        with open('categorias.txt', 'w') as base_de_dados_de_categorias:
+        with open(ARQUIVO_CATEGORIAS, 'w') as base_de_dados_de_categorias:
                 for categoria in categorias:         
                     categoria_convertido_em_str = json.dumps(categoria)
                     base_de_dados_de_categorias.write(f'{categoria_convertido_em_str}' + '\n')
@@ -80,7 +87,7 @@ class CategoriaDAO:
          for categoria in categorias:
                     if categoria["id"] == id:
                           categoria["nome"] = nome
-         with open('categorias.txt', 'w') as base_de_dados_de_categorias:
+         with open(ARQUIVO_CATEGORIAS, 'w') as base_de_dados_de_categorias:
                 for categoria in categorias:         
                     categoria_convertido_em_str = json.dumps(categoria)
                     base_de_dados_de_categorias.write(f'{categoria_convertido_em_str}' + '\n')
