@@ -36,8 +36,7 @@ class ProdutosController:
                                         categoria= categoria)
         if _ is False:
             return False
-        """print(produto)
-        print(produtos)"""
+        return True
 
     @classmethod
     def excluir_produto(cls, id: int):

@@ -32,6 +32,7 @@ class CategoriasController:
         _ = CategoriaDAO.atualizar_categoria(id= id, nome= nome)
         if _ is False:
             return False
+        return True
 
     @classmethod
     def excluir_categoria(cls, id: int):

@@ -1,2 +1,1 @@
 {"id": 1, "nome": "Teste"}
-{"id": 2, "nome": "Perifericos"}

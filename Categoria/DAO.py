@@ -67,6 +67,7 @@ class CategoriaDAO:
                 data_em_dict = json.loads(linha) #convertendo str para dicionario python
                 categorias.append(data_em_dict)
                 for categoria in categorias:
+                    print(f'Categoria {categoria}')
                     if categoria["id"] == id:
                           categorias.remove(categoria)
                     else:
