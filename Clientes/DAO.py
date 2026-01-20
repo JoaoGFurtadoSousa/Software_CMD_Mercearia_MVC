@@ -4,7 +4,7 @@ from pathlib import Path
 
 
 BASE_DIR = Path(__file__).parent
-ARQUIVO_PESSOAS = BASE_DIR / f"{BASE_DIR.name}.txt"
+ARQUIVO_PESSOAS = BASE_DIR / f"clientes.txt"
 
 
 class PessoaDAO:
@@ -68,7 +68,7 @@ class PessoaDAO:
                 for pessoa in pessoas:
                     print(f'Fornecedor {pessoa}')
                     if pessoa["id"] == id:
-                          pessoas.remove(pessoas)
+                          pessoas.remove(pessoa)
                     else:
                         existe_pessoa = False                            
         with open(ARQUIVO_PESSOAS, 'w') as base_de_dados_das_pessoas:
@@ -81,12 +81,16 @@ class PessoaDAO:
     
  
     @classmethod
-    def atualizar_pessoa(cls, id: int, nome: str):
+    def atualizar_pessoa(cls, id: int, nome: str, cpf: str, email: str):
          pessoas = []
+         tipo_pessoa = {"id": "1","tipo":"Cliente"}
          existe_pessoa, pessoa, pessoas = cls.buscar_pessoa(id= id)
          for pessoa in pessoas:
                     if pessoa["id"] == id:
                         pessoa["nome"] = nome
+                        pessoa["cpf"] = cpf
+                        pessoa["email"] = email
+                        pessoa["tipo_pessoa"] = tipo_pessoa
          with open(ARQUIVO_PESSOAS, 'w') as base_de_dados_das_pessoas:
                 for pessoa in pessoas:         
                     pessoa_convertida_em_str = json.dumps(pessoa)

@@ -1,7 +1,7 @@
 class Pessoa:
     fornecedores = []
 
-    def __init__(self, id:int, nome: str, cpf:str, email:str):
+    def __init__(self, id:int, nome: str, cpf:str, email:str, tipo_pessoa: dict):
         self.id = id
         self.nome = nome
         self.cpf = cpf

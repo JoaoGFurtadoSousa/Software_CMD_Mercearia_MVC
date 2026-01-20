@@ -1,0 +1,1 @@
+{"id": 2, "nome": "Joao Guilherme", "cpf": "12345678911", "email": "jg@teste.com", "tipo_pessoa": {"1": "Cliente"}}

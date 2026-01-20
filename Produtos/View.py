@@ -2,10 +2,12 @@ import os, time
 from Produtos.Controller import ProdutosController
 from Categoria.Controller import CategoriasController
 from Fornecedor.Controller import FornecedoresController
+from Clientes.Controller import ClientesController
 
 controllerProd = ProdutosController()
 controllerCateg = CategoriasController()
 controllerForn = FornecedoresController()
+controllerClientes = ClientesController()
 
 
 def limpa_terminal():
@@ -54,10 +56,29 @@ def alterar_fornecedor_interface(nome: str):
     else:
         print('Erro ao criar o Fornecedor.')
 
+def salvar_novo_cliente_interface(nome: str, cpf:str, email:str):
+    cliente = controllerClientes.salvar_cliente(nome = nome, cpf= cpf, email= email)
+    if cliente:
+        print("Cliente criado com sucesso. 201")
+    else:
+        print('Erro ao criar o Cliente. Tente novamente inserindo o formato valido dos dados')
+
+def alterar_cliente_interface(nome: str,  cpf:str, email:str):
+    cliente = controllerClientes.salvar_cliente(nome = nome, cpf= cpf, email= email)
+    if cliente:
+        print("Cliente criado com sucesso. 201")
+    else:
+        print('Erro ao criar o Cliente.')
+
 
 def exibir_menu():
     while True:
-        escolha_categoria = int(input("Escolha a categoria que deseja:\n [1] Produto \n [2] Categoria \n [3] Fornecedor \n [5] Sair"))
+        escolha_categoria = int(input("Escolha a categoria que deseja:" \
+        "\n [1] Produto " \
+        "\n [2] Categoria " \
+        "\n [3] Fornecedor " \
+        "\n [4] Clientes " \
+        "\n [5] Sair"))
         limpa_terminal()
         match escolha_categoria:
             case 1:
@@ -182,7 +203,7 @@ def exibir_menu():
                             categoria_que_sera_excluido= controllerCateg.excluir_categoria(id= categoria_que_sera_excluido)
                             print(f'Categoria excluida view {categoria_que_sera_excluido}')
                             if categoria_que_sera_excluido:
-                                print("Produto excluido com sucesso")
+                                print("Categoria excluido com sucesso")
                                 break
                             print("Erro ao excluir o produto")
             
@@ -241,6 +262,73 @@ def exibir_menu():
                                 print("Fornecedor excluido com sucesso")
                                 break
                             print("Erro ao excluir o Fornecedor")
+            case 4:
+                escolha_usuario = int(input("[1] Listar Clientes \n[2] Salvar Clientes \n[3] Alterar Clientes \n[4] Excluir Clientes \n"))
+                limpa_terminal()
+                match escolha_usuario:
+                    case 1:
+                        pessoas = controllerClientes.listar_todos_as_pessoas()
+                        for lista_de_pessoas in pessoas:
+                            print(lista_de_pessoas)
+                    
+                    case 2:
+                        while True:
+                            try:
+                                nome = str(input("Nome: "))
+                                cpf = str(input("CPF: "))
+                                email = str(input("Email: "))
+                                validacao_de_campos = controllerClientes.verifica_veracidade_dos_dados_inseridos(nome = nome,
+                                                                                                                 cpf= cpf,
+                                                                                                                 email= email)
+                                if validacao_de_campos:
+                                    salvar_novo_cliente_interface(nome = nome, cpf= cpf, email= email)
+                                    break
+                                print("Valores estão invalidos")
+                                time.sleep(2)
+                                limpa_terminal() 
+                                continue
+                            except ValueError as err:
+                                print(f"Valor da variavel {err} está no formato incorreto.")
+                                time.sleep(2)
+                                limpa_terminal()
+                                
+                    
+                    case 3:
+                        clientes = controllerClientes.listar_todos_as_pessoas()
+                        for lista_de_pessoas in clientes:
+                            print(lista_de_pessoas)
+                        while True:
+                            cliente_que_sera_alterado = int(input("Encaminhe o ID do cliente que irá ser alterado: "))
+                            nome = str(input("Nome: "))
+                            cpf = str(input("CPF: "))
+                            email = str(input("Email: "))
+                            cliente = controllerClientes.alterar_pessoa_existente(id = cliente_que_sera_alterado, 
+                                                                                  nome= nome,
+                                                                                  cpf= cpf,
+                                                                                  email= email)
+                            
+                            if cliente is None:
+                                print('Cliente com ID não existente. Insira um ID valido')
+                                time.sleep(2)
+                                limpa_terminal()
+                                continue
+                            else:
+                                print("Cliente alterado com sucesso. 200")
+                                break
+                    case 4:
+                        clientes = controllerClientes.listar_todos_as_pessoas()
+                        for lista_de_pessoas in clientes:
+                            print(lista_de_pessoas)
+                        while True:
+                            cliente_que_sera_excluido = int(input("Encaminhe o ID do cliente que irá ser alterado: "))
+                            cliente_que_sera_excluido= controllerClientes.excluir_pessoa(id= cliente_que_sera_excluido)
+                            if cliente_que_sera_excluido:
+                                print("Cliente excluido com sucesso")
+                                break
+                            print("Erro ao excluir o Cliente")
+            
+            
+            
             
             case 5:
                 break
