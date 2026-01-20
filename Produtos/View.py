@@ -307,9 +307,9 @@ def exibir_menu():
                                                                                   cpf= cpf,
                                                                                   email= email)
                             
-                            if cliente is None:
+                            if cliente is None or cliente is False:
                                 print('Cliente com ID não existente. Insira um ID valido')
-                                time.sleep(2)
+                                time.sleep(6)
                                 limpa_terminal()
                                 continue
                             else:

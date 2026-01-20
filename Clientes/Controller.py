@@ -11,6 +11,7 @@ class ClientesController:
             return True
         else:
             print("Insira um email valido.")
+            return False
 
     @classmethod
     def valida_se_o_cpf_e_valido(cls, cpf:str) -> bool:
@@ -38,9 +39,13 @@ class ClientesController:
     def verifica_veracidade_dos_dados_inseridos(cls, nome: str, cpf:str, email:str):
         validacao_email = cls.valida_se_o_email_e_valido(email)
         validacao_cpf = cls.valida_se_o_cpf_e_valido(cpf)
-        if len(nome)>=8 and (validacao_email==True) and validacao_cpf==True:
+        if len(nome)>=8 and validacao_email==True and validacao_cpf==True:
             return True
-        return False
+        elif len(nome)<8:
+            print("Nome contem menos de 8 digitos. Insira um nome com mais de oito digitos.")
+            return False
+        else:
+            return False
 
     @classmethod
     def salvar_cliente(cls, nome: str, cpf:str, email:str):
@@ -60,9 +65,15 @@ class ClientesController:
     
     @classmethod
     def alterar_pessoa_existente(cls, id : int, nome: str, cpf:str, email:str):
-        tipo_pessoa ={1:"Cliente"}
         cls.listar_todos_as_pessoas()
-        _ = PessoaDAO.atualizar_pessoa(id= id, nome= nome, cpf= cpf, email= email)
+        verifica_dados = cls.verifica_veracidade_dos_dados_inseridos(nome =nome, cpf= cpf, email= email)
+        print(f' Verifica dados {verifica_dados}')
+        if verifica_dados is False:
+            print(f'dentro do if {verifica_dados}')
+            return False
+        else:
+            _ = PessoaDAO.atualizar_pessoa(id= id, nome= nome, cpf= cpf, email= email)
+            return True
         if _ is False:
             return False
         return True
