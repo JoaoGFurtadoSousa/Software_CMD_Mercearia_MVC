@@ -42,9 +42,10 @@ class ClientesController:
         if len(nome)>=8 and validacao_email==True and validacao_cpf==True:
             return True
         elif len(nome)<8:
-            print("Nome contem menos de 8 digitos. Insira um nome com mais de oito digitos.")
+            print("Nome contem menos de 8 digitos. Insira um nome com mais de oito digitos. \n entrou no len(nome)")
             return False
         else:
+            print('entrou no else sem condicoess. se o valida_email ou o cpf forem false, ele vem pra ca')
             return False
 
     @classmethod
@@ -67,13 +68,16 @@ class ClientesController:
     def alterar_pessoa_existente(cls, id : int, nome: str, cpf:str, email:str):
         cls.listar_todos_as_pessoas()
         verifica_dados = cls.verifica_veracidade_dos_dados_inseridos(nome =nome, cpf= cpf, email= email)
+        existe_pessoa, pessoa, pessoas = PessoaDAO.buscar_pessoa(id= id)
+        print(f'Existe pessoa {existe_pessoa}')
         print(f' Verifica dados {verifica_dados}')
         if verifica_dados is False:
             print(f'dentro do if {verifica_dados}')
-            return False
+            return False, existe_pessoa
         else:
             _ = PessoaDAO.atualizar_pessoa(id= id, nome= nome, cpf= cpf, email= email)
-            return True
+            print(f'etdgaduy {_}')
+            return True, True
         if _ is False:
             return False
         return True

@@ -302,13 +302,17 @@ def exibir_menu():
                             nome = str(input("Nome: "))
                             cpf = str(input("CPF: "))
                             email = str(input("Email: "))
-                            cliente = controllerClientes.alterar_pessoa_existente(id = cliente_que_sera_alterado, 
+                            cliente, existe_pessoa = controllerClientes.alterar_pessoa_existente(id = cliente_que_sera_alterado, 
                                                                                   nome= nome,
                                                                                   cpf= cpf,
                                                                                   email= email)
-                            
-                            if cliente is None or cliente is False:
+                            print(f"Existe pessoa dentro da view return {existe_pessoa}")
+                            if cliente is False and existe_pessoa is False:
                                 print('Cliente com ID não existente. Insira um ID valido')
+                                time.sleep(6)
+                                limpa_terminal()
+                                continue
+                            elif cliente is False and existe_pessoa is True:
                                 time.sleep(6)
                                 limpa_terminal()
                                 continue
