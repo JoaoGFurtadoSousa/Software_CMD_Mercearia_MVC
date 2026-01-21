@@ -42,17 +42,16 @@ class ClientesController:
         if len(nome)>=8 and validacao_email==True and validacao_cpf==True:
             return True
         elif len(nome)<8:
-            print("Nome contem menos de 8 digitos. Insira um nome com mais de oito digitos. \n entrou no len(nome)")
+            print("Nome contem menos de 8 digitos. Insira um nome com mais de oito digitos)")
             return False
         else:
-            print('entrou no else sem condicoess. se o valida_email ou o cpf forem false, ele vem pra ca')
             return False
 
     @classmethod
     def salvar_cliente(cls, nome: str, cpf:str, email:str):
         id_pessoa = PessoaDAO.ler_todas_as_pessoas()
         id_pessoa = id_pessoa[1] + 1
-        tipo_pessoa = {1 : "Cliente"}
+        tipo_pessoa = {"id": "1","tipo":"Cliente"}
         verificacao_dos_dados_inseridos = cls.verifica_veracidade_dos_dados_inseridos(nome= nome, cpf= cpf, email= email)
         if verificacao_dos_dados_inseridos:
             pessoa = Pessoa(id = id_pessoa, nome = nome,  cpf= cpf, email= email, tipo_pessoa= tipo_pessoa)
@@ -69,18 +68,11 @@ class ClientesController:
         cls.listar_todos_as_pessoas()
         verifica_dados = cls.verifica_veracidade_dos_dados_inseridos(nome =nome, cpf= cpf, email= email)
         existe_pessoa, pessoa, pessoas = PessoaDAO.buscar_pessoa(id= id)
-        print(f'Existe pessoa {existe_pessoa}')
-        print(f' Verifica dados {verifica_dados}')
         if verifica_dados is False:
-            print(f'dentro do if {verifica_dados}')
             return False, existe_pessoa
         else:
             _ = PessoaDAO.atualizar_pessoa(id= id, nome= nome, cpf= cpf, email= email)
-            print(f'etdgaduy {_}')
             return True, True
-        if _ is False:
-            return False
-        return True
 
     @classmethod
     def excluir_pessoa(cls, id: int):

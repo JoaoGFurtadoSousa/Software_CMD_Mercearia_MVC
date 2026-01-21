@@ -1,3 +1,6 @@
-{"id": 3, "nome": "Nintendo Switch", "preco": 2.5, "fornecedor": "Nintendo", "categoria": "Videogames"}
-{"id": 4, "nome": "Xbox One", "preco": 1.5, "fornecedor": "Microsoft", "categoria": "Videogames"}
+{"id": 3, "nome": "Nintendo Switch", "preco": "2.500.0", "fornecedor": "Nintendo", "categoria": "Videogames"}
+{"id": 4, "nome": "Xbox One", "preco": "1.500.0", "fornecedor": "Microsoft", "categoria": "Videogames"}
 {"id": 5, "nome": "PS3", "preco": 950.0, "fornecedor": "Sony", "categoria": "Videogames"}
+{"id": 6, "nome": "5.000", "preco": 5.0, "fornecedor": "Sony", "categoria": "Videogames"}
+{"id": 7, "nome": "PS5", "preco": 5000.0, "fornecedor": "Sony", "categoria": "Videogames"}
+{"id": 8, "nome": "PS5", "preco": 5000.0, "fornecedor": "Sony", "categoria": "Videogames"}
