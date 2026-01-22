@@ -414,8 +414,6 @@ def exibir_menu():
                                     print(produto)
                                 produtos_venda, valor_total_produtos = controllerVendas.incrementa_valor_no_caixa(produtos_venda= produtos_venda,
                                                                                                                   valor_total_produtos=valor_total_produtos)
-                                print(f"prod {produtos_venda}")
-                                print(f"valor {valor_total_produtos}")
                                 validacao_de_campos = controllerVendas.verifica_se_ha_campos_nulos(id_cliente = id_cliente, 
                                                                                                    produtos_venda = produtos_venda,
                                                                                                    valor_total_produtos= valor_total_produtos)
@@ -440,32 +438,34 @@ def exibir_menu():
                         while True:
                             venda_que_sera_alterada = int(input("Encaminhe o ID da venda que será alterada: "))
                             id_cliente = int(input("ID Cliente: ")) 
-                            produtos_vendidos= int(input("Produtos vendidos: "))
-                            produtos_venda["id_produtos"].append(produtos_vendidos)
-                            valor_total = float(input("Valor total: "))
+                            entrada = input("Produtos vendidos (ex: 7,5): ")
+                            ids_produtos = [int(id.strip()) for id in entrada.split(',')]
+                            produtos_venda = {
+                            "id_produtos": ids_produtos
+                            }
                             venda = controllerVendas.alterar_venda_existente(id_venda = venda_que_sera_alterada,
                                                                         id_cliente = id_cliente,
-                                                                        produtos_vendidos = produtos_vendidos,
-                                                                        valor_total = valor_total)
+                                                                        produtos_vendidos = produtos_venda,
+                                                                        )
                             if venda is None:
                                 print('Venda com ID não existente. Insira um ID valido')
-                                time.sleep(2)
+                                time.sleep(5)
                                 limpa_terminal()
                                 continue
                             else:
                                 print("Venda alterada com sucesso. 200")
                                 break
                     case 4:
-                        produtos = controllerProd.listar_todos_os_produtos()
-                        for lista_de_produtos in produtos:
-                            print(lista_de_produtos)
+                        vendas = controllerVendas.listar_todos_as_vendas()
+                        for lista_de_vendas in vendas:
+                            print(lista_de_vendas)
                         while True:
-                            produto_que_sera_excluido = int(input("Encaminhe o ID do produto que irá ser alterado: "))
-                            produto_que_sera_excluido= controllerProd.excluir_produto(id= produto_que_sera_excluido)
-                            if produto_que_sera_excluido:
-                                print("Produto excluido com sucesso")
+                            venda_que_sera_excluida = int(input("Encaminhe o ID da venda que irá ser excluida: "))
+                            venda_que_sera_excluida= controllerVendas.excluir_venda(id_venda= venda_que_sera_excluida)
+                            if venda_que_sera_excluida:
+                                print("Venda excluida com sucesso")
                                 break
-                            print("Erro ao excluir o produto")
+                            print("Erro ao excluir a venda")
 
             case 7:
                 break

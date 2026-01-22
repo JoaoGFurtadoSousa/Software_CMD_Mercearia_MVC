@@ -82,15 +82,17 @@ class VendasDAO:
     @classmethod
     def atualizar_venda(cls, id_venda: int, id_cliente: int, produtos_vendidos: dict, valor_total: float, data_venda: str):
          vendas = []
-         existe_venda, venda, vendas = cls.buscar_venda(id= id)
-         for venda in vendas:
-                    if venda["id_venda"] == id_venda:
-                        venda["id_cliente"] = id_cliente
-                        venda["produtos_vendidos"] = produtos_vendidos
-                        venda["valor_total"] = valor_total
-                        venda["data_venda"] = data_venda
-         with open(ARQUIVO_VENDAS, 'w') as base_de_dados_das_vendas:
-                for venda in vendas:         
-                    venda_convertida_em_str = json.dumps(venda)
-                    base_de_dados_das_vendas.write(f'{venda_convertida_em_str}' + '\n')
-                return True
+         existe_venda, venda, vendas = cls.buscar_venda(id= id_venda)
+         if existe_venda:
+            for venda in vendas:
+                        if venda["id_venda"] == id_venda:
+                            venda["id_cliente"] = id_cliente
+                            venda["produtos_vendidos"] = produtos_vendidos
+                            venda["valor_total"] = valor_total
+                            venda["data_venda"] = data_venda
+            with open(ARQUIVO_VENDAS, 'w') as base_de_dados_das_vendas:
+                    for venda in vendas:         
+                        venda_convertida_em_str = json.dumps(venda)
+                        base_de_dados_das_vendas.write(f'{venda_convertida_em_str}' + '\n')
+            return True
+         return False

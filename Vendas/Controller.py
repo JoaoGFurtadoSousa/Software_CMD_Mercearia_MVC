@@ -2,7 +2,7 @@ from Vendas.DAO import VendasDAO
 from Vendas.Models import Venda
 from datetime import datetime
 from Produtos.Controller import ProdutosController
-import re
+
 
 
 controllerProd = ProdutosController()
@@ -40,15 +40,29 @@ class VendasController:
         return vendas
     
     @classmethod
-    def alterar_venda_existente(cls,id_venda: int, id_cliente: int, produtos_vendidos: dict, valor_total:float):
+    def alterar_venda_existente(cls,id_venda: int, id_cliente: int, produtos_vendidos: dict):
         cls.listar_todos_as_vendas()
         data = cls.cria_a_data()
+        valor_total = 0
         existe_venda, venda, vendas = VendasDAO.buscar_venda(id= id_venda)
-        _ = VendasDAO.atualizar_venda(id_venda= id_venda, 
-                                      id_cliente= id_cliente, 
-                                      produtos_vendidos=produtos_vendidos, 
-                                      valor_total=valor_total,
-                                      data_venda = data)
+        if not existe_venda:
+            return None
+        for produto_unico in produtos_vendidos['id_produtos']:
+            produto = controllerProd.buscar_produto_unico(id=produto_unico)
+            if not produto:
+                return None
+            else:
+               valor_total += float(produto["preco"])
+               retorno_DAO = VendasDAO.atualizar_venda(id_venda= id_venda, 
+                                id_cliente= id_cliente, 
+                                produtos_vendidos=produtos_vendidos, 
+                                valor_total=valor_total,
+                                data_venda = data)
+
+        if retorno_DAO is True:
+            return True
+        return False
+
         
 
     @classmethod

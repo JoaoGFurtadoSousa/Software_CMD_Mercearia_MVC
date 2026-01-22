@@ -49,4 +49,6 @@ class ProdutosController:
     @classmethod
     def buscar_produto_unico(cls, id: int):
         existe_produto ,produto, produtos = ProdutoDAO.buscar_produto(id = id)
-        return produto
+        if existe_produto:
+            return produto
+        return None
