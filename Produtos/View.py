@@ -412,17 +412,10 @@ def exibir_menu():
                                 limpa_terminal() 
                                 for produto in lista_de_produtos:
                                     print(produto)
-                                while True:
-                                    produto_a_ser_adicionado = int(input("ID do Produto: "))
-                                    produto = controllerProd.buscar_produto_unico(id = produto_a_ser_adicionado)
-                                    valor_total_produtos += float(produto["preco"])
-                                    print(valor_total_produtos)
-                                    produtos_venda["id_produtos"].append(produto_a_ser_adicionado)
-                                    para_de_adicionar_produtos = input("Para sair tecle a letra [S]: ").lower()
-                                    if para_de_adicionar_produtos == "s":
-                                        break
-                                    continue
-                                #produtos_venda = json.dumps(produtos_venda)
+                                produtos_venda, valor_total_produtos = controllerVendas.incrementa_valor_no_caixa(produtos_venda= produtos_venda,
+                                                                                                                  valor_total_produtos=valor_total_produtos)
+                                print(f"prod {produtos_venda}")
+                                print(f"valor {valor_total_produtos}")
                                 validacao_de_campos = controllerVendas.verifica_se_ha_campos_nulos(id_cliente = id_cliente, 
                                                                                                    produtos_venda = produtos_venda,
                                                                                                    valor_total_produtos= valor_total_produtos)
@@ -440,27 +433,27 @@ def exibir_menu():
                                 
                     
                     case 3:
-                        produtos = controllerProd.listar_todos_os_produtos()
-                        for lista_de_produtos in produtos:
-                            print(lista_de_produtos)
+                        produtos_venda = {"id_produtos": []}
+                        vendas = controllerVendas.listar_todos_as_vendas()
+                        for lista_de_vendas in vendas:
+                            print(lista_de_vendas)
                         while True:
-                            produto_que_sera_alterado = int(input("Encaminhe o ID do produto que irá ser alterado: "))
-                            nome = str(input("Nome: ")) 
-                            preco= float(input("Valor: "))
-                            fornecedor = str(input("Fornecedor: "))
-                            categoria = str(input("Categoria: "))
-                            produto = controllerProd.alterar_produto_existente(id = produto_que_sera_alterado,
-                                                                        nome= nome,
-                                                                        preco = preco,
-                                                                        fornecedor = fornecedor,
-                                                                        categoria = categoria)
-                            if produto is None:
-                                print('Produto com ID não existente. Insira um ID valido')
+                            venda_que_sera_alterada = int(input("Encaminhe o ID da venda que será alterada: "))
+                            id_cliente = int(input("ID Cliente: ")) 
+                            produtos_vendidos= int(input("Produtos vendidos: "))
+                            produtos_venda["id_produtos"].append(produtos_vendidos)
+                            valor_total = float(input("Valor total: "))
+                            venda = controllerVendas.alterar_venda_existente(id_venda = venda_que_sera_alterada,
+                                                                        id_cliente = id_cliente,
+                                                                        produtos_vendidos = produtos_vendidos,
+                                                                        valor_total = valor_total)
+                            if venda is None:
+                                print('Venda com ID não existente. Insira um ID valido')
                                 time.sleep(2)
                                 limpa_terminal()
                                 continue
                             else:
-                                print("Produto alterado com sucesso. 200")
+                                print("Venda alterada com sucesso. 200")
                                 break
                     case 4:
                         produtos = controllerProd.listar_todos_os_produtos()

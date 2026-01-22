@@ -1,9 +1,11 @@
 from Vendas.DAO import VendasDAO
 from Vendas.Models import Venda
 from datetime import datetime
+from Produtos.Controller import ProdutosController
 import re
 
 
+controllerProd = ProdutosController()
 
 class VendasController:
     @classmethod
@@ -18,9 +20,15 @@ class VendasController:
         return True
 
     @classmethod
-    def salvar_venda(cls, id_cliente: int, produtos_vendidos: dict, valor_total:float):
+    def cria_a_data(cls):
         data = datetime.now()
         data = str(data.date())
+        return data
+
+
+    @classmethod
+    def salvar_venda(cls, id_cliente: int, produtos_vendidos: dict, valor_total:float):
+        data = cls.cria_a_data()
         id_venda = VendasDAO.ler_todas_as_vendas()
         id_venda = id_venda[1] + 1 #validar se nenhum campo é nulo
         venda = Venda(id_venda = id_venda, id_cliente=id_cliente ,produtos_vendidos = produtos_vendidos, valor_total= valor_total, data_venda=data)
@@ -32,14 +40,15 @@ class VendasController:
         return vendas
     
     @classmethod
-    def alterar_venda_existente(cls,id_venda: int, id_cliente: int, produtos_vendidos: dict, valor_total:float, data_venda :str):
+    def alterar_venda_existente(cls,id_venda: int, id_cliente: int, produtos_vendidos: dict, valor_total:float):
         cls.listar_todos_as_vendas()
+        data = cls.cria_a_data()
         existe_venda, venda, vendas = VendasDAO.buscar_venda(id= id_venda)
         _ = VendasDAO.atualizar_venda(id_venda= id_venda, 
                                       id_cliente= id_cliente, 
                                       produtos_vendidos=produtos_vendidos, 
                                       valor_total=valor_total,
-                                      data_venda = data_venda)
+                                      data_venda = data)
         
 
     @classmethod
@@ -48,11 +57,17 @@ class VendasController:
         if venda_excluida:
             return True
         return False
-    
-venda = VendasController()
-#venda.salvar_venda(2, {"IDS": [3, 4]}, 1500.0)
-"""vendas = venda.listar_todos_as_vendas()
-for venda in vendas:
-    print(venda)"""
-#venda.alterar_venda_existente(2, 3, {"IDS": [5, 6]}, 1700.0, "2026-01-21")
-venda.excluir_venda(2)
+
+
+    @classmethod
+    def incrementa_valor_no_caixa(cls, produtos_venda:dict, valor_total_produtos:float):
+        while True:
+            produto_a_ser_adicionado = int(input("ID do Produto: "))
+            produto = controllerProd.buscar_produto_unico(id = produto_a_ser_adicionado)
+            valor_total_produtos += float(produto["preco"])
+            print(valor_total_produtos)
+            produtos_venda["id_produtos"].append(produto_a_ser_adicionado)
+            para_de_adicionar_produtos = input("Para sair tecle a letra [S]: ").lower()
+            if para_de_adicionar_produtos == "s":
+                return produtos_venda, valor_total_produtos
+            continue
