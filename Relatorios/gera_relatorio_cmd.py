@@ -6,13 +6,15 @@ controllerVendas = VendasController()
 class Relatorios:
     @classmethod
     def relatorio_de_vendas_por_data(cls, data: int):
-        vendas = controllerVendas.listar_todos_as_vendas()
-        for venda in vendas:
-            dia_da_venda = int(venda["data_venda"][8:])
-            if dia_da_venda == data:
-                print(venda)
-
-
+        try:
+            vendas = controllerVendas.listar_todos_as_vendas()
+            for venda in vendas:
+                dia_da_venda = int(venda["data_venda"][8:])
+                if dia_da_venda == data:
+                    print(venda)
+            return True
+        except:
+            return None
 
     @classmethod
     def relatorio_produtos_mais_vendidos(cls):
@@ -27,7 +29,7 @@ class Relatorios:
                     contador[produto_id] = 1
         produto_mais_vendido = max(contador, key= contador.get)
         quantidade = contador[produto_mais_vendido]
-        print(f"Produto mais vendido: {produto_mais_vendido}")
+        print(f"Id do Produto mais vendido: {produto_mais_vendido}")
         print(f"Quantidade de produtos vendidos: {quantidade}")
 
     @classmethod
@@ -45,12 +47,7 @@ class Relatorios:
 
         cliente_que_mais_comprou = max(contador, key=contador.get)
         quantidade = contador[cliente_que_mais_comprou]
-        print(f"Cliente que mais comprou: {cliente_que_mais_comprou}")
-        print(f"Quantidade de produtos vendidos: {quantidade}")
+        print(f"ID do Cliente que mais comprou: {cliente_que_mais_comprou}")
+        print(f"Quantidade de compras realizadas por esse cliente: {quantidade}")
     
      
-
-
-relatorio = Relatorios()
-#relatorio.relatorio_de_vendas_por_data(22)
-relatorio.relatorio_clientes_mais_compraram()

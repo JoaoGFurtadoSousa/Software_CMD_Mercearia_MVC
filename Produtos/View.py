@@ -5,6 +5,7 @@ from Fornecedor.Controller import FornecedoresController
 from Clientes.Controller import ClientesController
 from Funcionarios.Controller import FuncionariosController
 from Vendas.Controller import VendasController
+from Relatorios.gera_relatorio_cmd import Relatorios
 
 
 controllerProd = ProdutosController()
@@ -13,6 +14,7 @@ controllerForn = FornecedoresController()
 controllerClientes = ClientesController()
 controllerFunc = FuncionariosController()
 controllerVendas = VendasController()
+relatorio = Relatorios()
 
 
 def limpa_terminal():
@@ -74,7 +76,8 @@ def exibir_menu():
         "\n [4] Clientes " \
         "\n [5] Funcionarios " \
         "\n [6] Caixa " \
-        "\n [7] Sair"))
+        "\n [7] Relatorios " \
+        "\n [8] Sair"))
         limpa_terminal()
         match escolha_categoria:
             case 1:
@@ -466,8 +469,29 @@ def exibir_menu():
                                 print("Venda excluida com sucesso")
                                 break
                             print("Erro ao excluir a venda")
-
+            
             case 7:
+                escolha_usuario = int(input("Escolha o relatorio desejado:\n [1]Relatorio por data \n [2]Relatorio de produtos mais vendidos \n"\
+            " [3]Relatorio de clientes que mais compraram"))
+                match escolha_usuario:
+                    case 1:
+                       while True:
+                        data = int(input("Data da consulta: "))
+                        resultado_relatorio = relatorio.relatorio_de_vendas_por_data(data= data)
+                        print(resultado_relatorio)
+                        if resultado_relatorio is None:
+                            print("Não existe vendas nessa data.")
+                            continue
+                        break
+                       
+                    case 2:
+                        relatorio.relatorio_produtos_mais_vendidos()
+
+                    case 3:
+                        relatorio.relatorio_clientes_mais_compraram()
+                
+
+            case 8:
                 break
     
 if __name__ == "__main__":
