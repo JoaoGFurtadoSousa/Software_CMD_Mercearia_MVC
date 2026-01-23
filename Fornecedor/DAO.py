@@ -67,7 +67,6 @@ class FornecedorDAO:
                 data_em_dict = json.loads(linha) #convertendo str para dicionario python
                 fornecedores.append(data_em_dict)
                 for fornecedor in fornecedores:
-                    print(f'Fornecedor {fornecedor}')
                     if fornecedor["id"] == id:
                           fornecedores.remove(fornecedor)
                     else:

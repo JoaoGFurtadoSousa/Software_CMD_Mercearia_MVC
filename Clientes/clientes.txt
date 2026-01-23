@@ -1,3 +1,3 @@
-{"id": 2, "nome": "Joao Guilherme", "cpf": "12345678912", "email": "jgtnn@teste.com", "tipo_pessoa": {"id": "1", "tipo": "Cliente"}}
+{"id": 2, "nome": "Joao Guilherme", "cpf": "74185296332", "email": "jg@teste.com", "tipo_pessoa": {"id": "1", "tipo": "Cliente"}}
 {"id": 3, "nome": "Angelo Romeu", "cpf": "12345678912", "email": "angeloromeu@teste.com", "tipo_pessoa": {"1": "Cliente"}}
-{"id": 4, "nome": "Angelo Roberto", "cpf": "14785236945", "email": "robertoangelo@teste.com", "tipo_pessoa": {"id": "1", "tipo": "Cliente"}}
+{"id": 5, "nome": "Caio Pythonando", "cpf": "14785236912", "email": "caio@teste.com", "tipo_pessoa": {"id": "1", "tipo": "Cliente"}}

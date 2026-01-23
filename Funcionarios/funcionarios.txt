@@ -1,1 +1,2 @@
-{"id": 1, "nome": "JoaoGUIlherme", "cpf": "74185296312", "email": "Jgtn@teste.com", "tipo_pessoa": {"id": "2", "tipo": "Funcionario"}}
+{"id": 1, "nome": "Angelo roberto", "cpf": "12365478995", "email": "angelo@teste.com", "tipo_pessoa": {"id": "2", "tipo": "Funcionario"}}
+{"id": 2, "nome": "Angelo romeu", "cpf": "14785236998", "email": "angelo@teste.com", "tipo_pessoa": {"id": "2", "tipo": "Funcionario"}}

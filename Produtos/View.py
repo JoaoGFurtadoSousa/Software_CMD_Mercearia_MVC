@@ -303,7 +303,6 @@ def exibir_menu():
                                                                                   nome= nome,
                                                                                   cpf= cpf,
                                                                                   email= email)
-                            print(f"Existe pessoa dentro da view return {existe_pessoa}")
                             if cliente is False and existe_pessoa is False:
                                 print('Cliente com ID não existente. Insira um ID valido')
                                 time.sleep(6)
@@ -478,7 +477,6 @@ def exibir_menu():
                        while True:
                         data = int(input("Data da consulta: "))
                         resultado_relatorio = relatorio.relatorio_de_vendas_por_data(data= data)
-                        print(resultado_relatorio)
                         if resultado_relatorio is None:
                             print("Não existe vendas nessa data.")
                             continue

@@ -37,7 +37,6 @@ class FornecedoresController:
     @classmethod
     def excluir_fornecedor(cls, id: int):
         fornecedor_excluido = FornecedorDAO.excluir_fornecedor(id = id)
-        print(f'Fornecdor controller{fornecedor_excluido}')
         if fornecedor_excluido:
             return True
         return False

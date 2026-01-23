@@ -66,7 +66,6 @@ class PessoaDAO:
                 data_em_dict = json.loads(linha) #convertendo str para dicionario python
                 pessoas.append(data_em_dict)
                 for pessoa in pessoas:
-                    print(f'Fornecedor {pessoa}')
                     if pessoa["id"] == id:
                           pessoas.remove(pessoa)
                     else:
