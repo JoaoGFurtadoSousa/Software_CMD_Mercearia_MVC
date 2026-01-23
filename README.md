@@ -27,6 +27,11 @@ O projeto segue o padrão **MVC (Model–View–Controller)**, visando organiza�
 
 ---
 
+## Executar Projeto
+
+- Comando **python -m Produtos.View**
+
+---
   ## Arquitetura e Boas Práticas
 - Arquitetura **MVC (Model–View–Controller)**
 - Código modular e organizado por domínio
@@ -42,6 +47,7 @@ O projeto segue o padrão **MVC (Model–View–Controller)**, visando organiza�
 - Arquitetura MVC
 - Execução via Terminal / CMD
 - Git & GitHub para versionamento
+
 
 ├── .gitignore
 └── README.md
